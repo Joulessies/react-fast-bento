@@ -78,9 +78,9 @@ const Bentos = (props: BentoProps) => {
     }, []);
 
     // The bento border
-    useEffect(() => {}
+    useEffect(() => {
         setBentoBorder(bentoBorder || {});
-    } []);
+    }, []);
 }
 
 
