@@ -1,4 +1,11 @@
-import { useState, useId, useRef, useEffect, forwardRef } from 'react';
+import {
+    useState,
+    useId,
+    useRef,
+    useEffect,
+    forwardRef,
+    CSSProperties
+} from 'react';
 
 export type BentoProps = {
     /**
@@ -13,6 +20,18 @@ export type BentoProps = {
     * @default ""
     **/
     className?: string;
+    /**
+    * @description width of the bento for a container.
+    * @type number
+    * @default 300
+    **/
+    width?: number;
+    /**
+    * @description height of the bento for a container.
+    * @type number
+    * @default 300
+     **/
+    height?: number;
 };
 
 const Bentos = (props: BentoProps) => {
@@ -46,12 +65,22 @@ const Bentos = (props: BentoProps) => {
     // Calculate the bento width
     useEffect(() => {
         setBentoWidth(bentoWidth);
-    }, [bentoWidth]);
+    }, []);
 
     // Calculate the bento height
     useEffect(() => {
         setBentoHeight(bentoHeight);
-    }, [bentoHeight]);
+    }, []);
+
+    // The bento background color
+    useEffect(() => {
+        setBentoBackground(bentoBackground || 'white');
+    }, []);
+
+    // The bento border
+    useEffect(() => {}
+        setBentoBorder(bentoBorder || {});
+    } []);
 }
 
 
