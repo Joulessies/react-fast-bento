@@ -7,6 +7,7 @@ import {
     useCallback,
     FC
 } from 'react';
+import useBentoDimensions from './hooks/useBentoDimensions';
 
 export type BentoProps = {
     /**
@@ -45,7 +46,13 @@ export type BentoProps = {
     @default {}
      **/
     position?: CSSProperties;
-};
+    /**
+     @description bento grid style
+     @type CSSProperties
+     @default 0
+    **/
+    gridstyle?: CSSProperties;
+}
 
 const Bentos: FC<BentoProps> = ({
     const {
@@ -57,38 +64,34 @@ const Bentos: FC<BentoProps> = ({
         position = {}
     },
 } => {
-
-    // React Hooks
-    const [bento, setBento] = useState<string>('');
-    const [bentoWidth, setBentoWidth] = useState<number>(300);
-    const [bentoHeight, setBentoHeight] = useState<number>(300);
-    const [bentoBackground, setBentoBackground] = useState<string>('');
-    const [bentoBorder, setBentoBorder] = useState<string>('');
-    const containerRef = useRef<HTMLDivElement>(null);
     const bentoRef = useRef<HTMLDivElement>(null);
+    const [bentoId] = useState(`bento-${useId()}`);
+    const { bentoWidth, bentoHeight } = useBentoDimensions(bentoRef, width, height);
 
-    const calculateWidth = useCallback(() => {
+    useEffect(() => {
         if (bentoRef.current) {
-            const containerRect = bentoRef.current.getBoundingClientRect();
-            const bentoRect = bentoRef.current.getBoundingClientRect();
-            const bentoWidth = containerRect.width - bentoRect.width;
-            setBentoWidth(bentoRef.current.offsetWidth);
+            bentoRef.current.style.width = `${bentoWidth}px`;
+            bentoRef.current.style.height = `${bentoHeight}px`;
         }
+    }, [bentoWidth, bentoHeight]);
 
-        if (bentoRef.current) {
-            const containerRect = bentoRef.current.getBoundingClientRect();
-            const bentoRect = bentoRef.current.getBoundingClientRect();
-            const bentoHeight = containerRect.height - bentoRect.height;
-            setBentoHeight(bentoRef.current.offsetHeight);
-        }
-
-        if (autoWidth || autoHeight) {
-            setBentoWidth('auto');
-        }
-
-    }, [autoWidth, containerRef, bentoRef]);
-
-  
+    return (
+        <div
+            ref={bentoRef}
+            id={bentoId}
+            style={{
+                ...style,
+                width: bentoWidth,
+                height: bentoHeight,
+                borderRadius: `${borderRadius}px`,
+                ...position,
+            }}
+        >
+            {Bento}
+        </div>
+    );
 }
+
+
 
 
