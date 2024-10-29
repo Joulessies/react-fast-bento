@@ -26,3 +26,5 @@ const useBentoDimensions = () => {
 
   return { bentoWidth, bentoHeight, containerRef, bentoRef };
 };
+
+export default useBentoDimensions;
