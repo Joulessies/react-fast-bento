@@ -15,12 +15,6 @@ export type BentoProps = {
     **/
     style?: React.CSSProperties;
     /**
-    * @description className of the bento for a container.
-    * @type string
-    * @default ""
-    **/
-    className?: string;
-    /**
     * @description width of the bento for a container.
     * @type number
     * @default 300
@@ -32,6 +26,12 @@ export type BentoProps = {
     * @default 300
      **/
     height?: number;
+    /**
+    @description border radius of the bento for a container.
+    @type number
+    @default 0
+     **/
+    borderRadius?: number;
 };
 
 const Bentos = (props: BentoProps) => {
@@ -52,6 +52,7 @@ const Bentos = (props: BentoProps) => {
     bentoLeft = {},
     container = {},
 } {
+
     // React Hooks
     const [bentoWidth, setBentoWidth] = useState(300);
     const [bentoHeight, setBentoHeight] = useState(300);
@@ -81,6 +82,7 @@ const Bentos = (props: BentoProps) => {
     useEffect(() => {
         setBentoBorder(bentoBorder || {});
     }, []);
+
 }
 
 
