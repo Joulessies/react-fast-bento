@@ -67,6 +67,13 @@ const Bentos: FC<BentoProps> = ({
     const bentoRef = useRef<HTMLDivElement>(null);
     const [bentoId] = useState(`bento-${useId()}`);
     const { bentoWidth, bentoHeight } = useBentoDimensions(bentoRef, width, height);
+    const [ borderRadius, setBorderRadius ] = useRef(0);
+
+    useEffect(() => {
+        if (borderRadius) {
+            setBorderRadius(borderRadius);
+        }
+    }, [setBorderRadius, borderRadius]);
 
     useEffect(() => {
         if (bentoRef.current) {
