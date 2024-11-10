@@ -70,10 +70,8 @@ const Bentos: FC<BentoProps> = ({
     const [ borderRadius, setBorderRadius ] = useRef(0);
 
     useEffect(() => {
-        if (borderRadius) {
-            setBorderRadius(borderRadius);
-        }
-    }, [setBorderRadius, borderRadius]);
+        if (border )
+    }, []);
 
     useEffect(() => {
         if (bentoRef.current) {
@@ -99,6 +97,6 @@ const Bentos: FC<BentoProps> = ({
     );
 }
 
-
+export default Bentos;
 
 
