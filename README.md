@@ -1,3 +1,1 @@
-<center>
-  **This page is under construction**
-</center>
+**This component is under construction.
