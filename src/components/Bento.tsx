@@ -1,54 +1,19 @@
-import { useState, useId, useRef, useEffect, CSSProperties, FC } from 'react';
-import useBentoDimensions from './hooks/useBentoDimensions';
+import React from 'react';
 
-export type BentoProps = {
-  Bento?: string;
-  style?: React.CSSProperties;
-  width?: number;
-  height?: number;
-  borderRadius?: number;
-  position?: CSSProperties;
-  gridstyle?: CSSProperties;
-};
+interface BentoProps {
+  title: string;
+  description: string;
+}
 
-const Bento: FC<BentoProps> = ({
-  Bento = '',
-  style = {},
-  width = 300,
-  height = 300,
-  borderRadius = 0,
-  position = {},
-}) => {
-  const bentoRef = useRef<HTMLDivElement>(null);
-  const [bentoId] = useState(`bento-${useId()}`);
-  const { bentoWidth, bentoHeight } = useBentoDimensions(
-    bentoRef,
-    width,
-    height
-  );
-
-  useEffect(() => {
-    if (bentoRef.current) {
-      bentoRef.current.style.width = `${bentoWidth}px`;
-      bentoRef.current.style.height = `${bentoHeight}px`;
-    }
-  }, [bentoWidth, bentoHeight]);
-
-  return (
-    <div
-      ref={bentoRef}
-      id={bentoId}
-      style={{
-        ...style,
-        width: bentoWidth,
-        height: bentoHeight,
-        borderRadius: `${borderRadius}px`,
-        ...position,
-      }}
-    >
-      {Bento}
-    </div>
-  );
-};
+const Bento: React.FC<BentoProps> = ({ title, description }) => (
+  <div
+    style={{ padding: '16px', border: '1px solid #ddd', borderRadius: '8px' }}
+  >
+    <h1 style={{ margin: 0, fontSize: '24px', color: '#333' }}>{title}</h1>
+    <p style={{ margin: '8px 0 0', fontSize: '16px', color: '#666' }}>
+      {description}
+    </p>
+  </div>
+);
 
 export default Bento;

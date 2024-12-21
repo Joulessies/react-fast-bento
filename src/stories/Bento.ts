@@ -1,19 +1,19 @@
-import { Meta, StortObj } from '@storybook/react';
-import { Bento } from './Bento.ts';
 
-const meta: Meta<typeof Bento> = {
-  component: Bento,
-};
+import React from 'react';
 
-export default meta;
+interface BentoProps {
+  title: string;
+  description: string;
+  size: int;
+}
 
-type Story = StortObj<typeof Bento>;
+const Bento: React.FC<BentoProps> = ({ title, description, size }) => (
+  <div>
+    <h1>{title}</h1>
+    <p>{description}</p>
+    <p>{size}</p>
+  </div>
+);
 
-export const Default: Story = {
-  args: {
-    dataType: 'latency',
-    showBentoLabels: true,
-    BentoBorderRadius: '20px',
-    label: 'Label distribution',
-  },
-};
+export default Bento;
+
