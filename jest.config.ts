@@ -4,10 +4,6 @@ const config: Config.InitialOptions = {
   verbose: true,
   preset: 'ts-jest',
   testEnvironment: 'node',
-  collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.ts'],
-  coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'html'],
   testMatch: ['**/*.test.ts'],
   moduleFileExtensions: ['ts', 'js'],
   transform: {
