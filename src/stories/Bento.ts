@@ -7,7 +7,7 @@ interface BentoProps {
   size: int;
 }
 
-const Bento: React.FC<BentoProps> = ({ title, description, size }) => (
+const Bento: React.FC<BentoProps> = ({ title, description }) => (
   <div>
     <h1>{title}</h1>
     <p>{description}</p>
