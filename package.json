@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "analyze": "webpack-bundle-analyzer dist/stats.json",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -58,7 +59,8 @@
     "ts-node": "^10.9.2",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.10.0",
-    "vite": "^5.4.9"
+    "vite": "^5.4.9",
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "config": {
     "commitizen": {

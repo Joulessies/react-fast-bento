@@ -1,1 +1,1 @@
-**This component is under construction.**
+![React Fast Bento Logo]()
