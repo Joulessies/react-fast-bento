@@ -1,3 +1,1 @@
-<div style="width: 200px;">
-  ![React Fast Bento Logo](./documentation/src/images/Bento.png)
-</div>
+<img src="./documentation/src/images/Bento.png" alt="React Fast Bento Logo" width="200"/>
