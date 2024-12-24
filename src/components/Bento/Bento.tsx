@@ -3,6 +3,7 @@ import React from 'react';
 interface BentoProps {
   title: string;
   description: string;
+  size: number;
   width: number;
   height: number;
 }

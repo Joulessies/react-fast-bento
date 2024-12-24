@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import Bento from '../components/Bento';
+import Bento from '../components/Bento/Bento.tsx';
 
 export default {
   title: 'Bento Layout System',

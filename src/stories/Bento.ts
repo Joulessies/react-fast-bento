@@ -4,10 +4,10 @@ import React from 'react';
 interface BentoProps {
   title: string;
   description: string;
-  size: int;
+  size: number;
 }
 
-const Bento: React.FC<BentoProps> = ({ title, description }) => (
+const Bento: React.FC<BentoProps> = ({ title, description, size }) => (
   <div>
     <h1>{title}</h1>
     <p>{description}</p>
