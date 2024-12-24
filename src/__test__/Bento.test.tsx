@@ -11,7 +11,7 @@ const props = {
   height: 200,
 };
 
-test('renders Bento component with correct styles', () => {
+test('Renders Test for Bento', () => {
   const { getByText } = render(<Bento {...props} />);
   expect(getByText('Bento Box')).toBeInTheDocument();
   expect(getByText('This is a Bento component.')).toBeInTheDocument();
