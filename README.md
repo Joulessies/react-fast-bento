@@ -1,3 +1,3 @@
-<div style="text-align: center;">
+<p align="center">
   <img src="./documentation/src/images/Bento.png" alt="React Fast Bento Logo" width="200"/>
-</div>
+</p>
