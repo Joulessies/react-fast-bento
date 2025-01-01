@@ -1,5 +1,3 @@
-<p align="center">
-  <img src="./documentation/src/images/Bento.png" alt="React Fast Bento Logo" width="300"/>
-</p>
+![Bento](./documentation/src/images/Bento.png)
 
 # React Fast Bento
