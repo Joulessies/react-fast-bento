@@ -17,8 +17,12 @@ const Bento: React.FC<BentoProps> = ({
 }) => {
   return (
     <div
-      className={`grid gap-${spacing} ${className}`}
-      style={{ gridTemplateColumns: `repeat(${columns}, 1fr)`, ...style }}
+      className={`grid ${className}`}
+      style={{
+        gridTemplateColumns: `repeat(${columns}, 1fr)`,
+        gap: `${spacing}px`,
+        ...style,
+      }}
     >
       {children}
     </div>
