@@ -1,0 +1,28 @@
+{
+  "name": "react-fast-bento",
+  "version": "1.0.0",
+  "description": "🍱 Lightweight React component for easy bento grid layouts and boxes.",
+  "license": "ISC",
+  "author": "Joulessies",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "vitest --enviroment jsdom --coverage",
+    "lint": "eslint --ext js,jsx,ts,tsx --max-warnings 0",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@testing-library/react": "^16.2.0",
+    "husky": "^9.1.7",
+    "prettier": "3.4.2",
+    "rollup": "^4.34.6",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.5"
+  }
+}
