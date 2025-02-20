@@ -1,5 +1,7 @@
 # React Fast Bento
-A React Fast Package that makes easy boxes and grids fast!
+
+A lightweight React package for building responsive bento grids and layouts with ease.
+
 ```
 npm install react-fast-bento
 ```
