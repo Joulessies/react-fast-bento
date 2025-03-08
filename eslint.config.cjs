@@ -4,8 +4,9 @@ const tsParser = require("@typescript-eslint/parser");
 const react = require("eslint-plugin-react");
 
 module.exports = [
-  js.configs.recommended,
-  {
+js.configs.recommended,
+{
+    ignores: ["**/dist/**", "**/documentation/.docusaurus/**"],
     files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
       parser: tsParser,
