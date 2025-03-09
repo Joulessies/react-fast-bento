@@ -7,7 +7,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c",
+    "clean": "rm -rf dist",
+    "build": "tsup src --format esm,cjs --dts --clean",
     "test": "vitest",
     "lint": "eslint --ext js,jsx,ts,tsx --ignore-pattern 'dist/*' --ignore-pattern 'documentation/.docusaurus/*' --max-warnings 0",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
@@ -42,8 +43,10 @@
     "prettier": "3.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "rimraf": "^6.0.1",
     "rollup": "^4.34.6",
-    "typescript": "^5.7.3",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
     "vite": "^6.1.0",
     "vitest": "^3.0.5"
   },
@@ -52,7 +55,12 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
+    "react-grid-system": "^8.2.1",
     "tslib": "^2.8.1"
   }
 }

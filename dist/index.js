@@ -1,24 +1,11 @@
-"use strict";
-
-const Bento = ({
-  columns = 4,
-  spacing = 10,
-  children,
-  style,
-  className = "",
-}) => {
-  return React.createElement(
-    "div",
-    {
-      className: `grid ${className}`,
-      style: {
-        gridTemplateColumns: `repeat(${columns}, 1fr)`,
-        gap: `${spacing}px`,
-        ...style,
-      },
-    },
-    children,
-  );
+import {
+  BentoContainer
+} from "./chunk-YT5NGP45.js";
+import {
+  BentoItem
+} from "./chunk-46VXX37E.js";
+import "./chunk-ZOBA7WIN.js";
+export {
+  BentoContainer,
+  BentoItem
 };
-
-module.exports = { Bento };
