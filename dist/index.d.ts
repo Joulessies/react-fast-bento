@@ -1,3 +1,3 @@
-export { BentoContainer } from './components/BentoContainer.js';
-export { BentoItem } from './components/BentoItem.js';
-import 'react';
+export { BentoContainer } from "./components/BentoContainer";
+export { BentoItem } from "./components/BentoItem";
+//# sourceMappingURL=index.d.ts.map

@@ -20,7 +20,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "commitlint": "commitlint --edit ${1}"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",

@@ -1,5 +1,4 @@
-import { FC, ReactNode, CSSProperties } from 'react';
-
+import { FC, CSSProperties, ReactNode } from "react";
 interface BentoItemProps {
     children: ReactNode;
     colSpan?: number;
@@ -7,6 +6,6 @@ interface BentoItemProps {
     style?: CSSProperties;
     className?: string;
 }
-declare const BentoItem: FC<BentoItemProps>;
-
-export { BentoItem };
+export declare const BentoItem: FC<BentoItemProps>;
+export {};
+//# sourceMappingURL=BentoItem.d.ts.map
