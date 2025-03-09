@@ -1,28 +1,38 @@
 {
   "name": "react-fast-bento",
   "version": "1.0.0",
-  "description": "🍱 Lightweight React component for easy bento grid layouts and boxes.",
+  "description": "🍱 A lightweight React package for building responsive bento grids and layouts with ease.",
+  "keywords": [],
+  "homepage": "https://github.com/Joulessies/react-fast-bento#readme",
+  "bugs": {
+    "url": "https://github.com/Joulessies/react-fast-bento/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joulessies/react-fast-bento.git"
+  },
   "license": "ISC",
-  "author": "Joulessies",
+  "author": "",
   "type": "module",
-  "main": "index.js",
+  "main": "rollup.config.js",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "tsup src --format esm,cjs --dts --clean",
-    "test": "vitest",
-    "lint": "eslint --ext js,jsx,ts,tsx --ignore-pattern 'dist/*' --ignore-pattern 'documentation/.docusaurus/*' --max-warnings 0",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "prepare": "husky || true",
-    "commitlint": "commitlint --edit"
+    "build": "rollup -c",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "devDependencies": {
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.9",
     "@babel/eslint-parser": "^7.26.8",
+    "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
-    "@commitlint/cli": "^19.7.1",
-    "@commitlint/config-conventional": "^19.7.1",
-    "@eslint/compat": "^1.2.6",
-    "@eslint/js": "^9.21.0",
-    "@rollup/plugin-commonjs": "^28.0.2",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@eslint/compat": "^1.2.7",
+    "@eslint/js": "^9.22.0",
+    "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.2",
     "@testing-library/dom": "^10.4.0",
@@ -30,37 +40,27 @@
     "@testing-library/react": "^16.2.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "@typescript-eslint/eslint-plugin": "^8.25.0",
-    "@typescript-eslint/parser": "^8.25.0",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@typescript-eslint/eslint-plugin": "^8.26.0",
+    "@typescript-eslint/parser": "^8.26.0",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^9.21.0",
+    "eslint": "^9.22.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react": "^7.37.4",
     "husky": "^9.1.7",
     "jsdom": "^26.0.0",
-    "prettier": "3.4.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "prettier": "3.5.3",
     "rimraf": "^6.0.1",
-    "rollup": "^4.34.6",
+    "rollup": "^4.35.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
-    "vite": "^6.1.0",
-    "vitest": "^3.0.5"
+    "vite": "^6.2.1",
+    "vitest": "^3.0.8"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
   "dependencies": {
-    "react-grid-system": "^8.2.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "tslib": "^2.8.1"
   }
 }
