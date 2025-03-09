@@ -1,8 +1,7 @@
-export default {
+module.exports = {
   env: {
     node: true,
-    browser: true,
-    es2021: true,
+    es6: true,
   },
   extends: ["eslint:recommended"],
   parserOptions: {
