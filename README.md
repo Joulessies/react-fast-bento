@@ -2,9 +2,12 @@
 
 A lightweight React package for building responsive bento grids and layouts with ease.
 
-# Coming soon...
+# Installation
 
 ```
 npm install react-fast-bento
 ```
+
+# Coming soon...
+
 
