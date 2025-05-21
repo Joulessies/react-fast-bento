@@ -11,6 +11,29 @@ interface BentoContainerProps {
     style?: CSSProperties;
     width?: string;
     height?: string;
+    animate?: boolean;
+    transition?: string;
+    animationDuration?: string;
+    sm?: {
+        colSpan?: number;
+        rowSpan?: number;
+        spacing?: number;
+    };
+    md?: {
+        colSpan?: number;
+        rowSpan?: number;
+        spacing?: number;
+    };
+    lg?: {
+        colSpan?: number;
+        rowSpan?: number;
+        spacing?: number;
+    };
+    theme?: "light" | "dark" | "minimal";
+    lazyLoad?: boolean;
+    itemCount?: number;
+    onDragEnd?: (result: any) => void;
+    gridTemplate?: string;
 }
 export declare const BentoContainer: FC<BentoContainerProps>;
 export {};

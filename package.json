@@ -14,9 +14,14 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "rollup.config.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "tsup src/index.tsx --format cjs,esm --dts --external react --external react-dom --external framer-motion --external react-beautiful-dnd",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -65,5 +70,11 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tslib": "^2.8.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "framer-motion": "^10.0.0",
+    "react-beautiful-dnd": "^13.0.0"
   }
 }
