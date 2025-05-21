@@ -1,155 +1,147 @@
-# React Fast Bento
+# 🍱 React Fast Bento
 
-A lightweight and flexible React component library for creating beautiful bento grid layouts.
+A lightweight React package for building responsive bento grids and layouts with ease. Perfect for creating modern, dynamic dashboards and content layouts.
+
+## Features
+
+- 🎨 Responsive grid layouts
+- 🖱️ Drag and drop functionality
+- 🎭 Smooth animations with Framer Motion
+- ♿ Accessibility support
+- 🎯 TypeScript support
+- 🎨 Customizable themes
+- 📱 Mobile-friendly design
 
 ## Installation
 
 ```bash
 npm install react-fast-bento
+# or
+yarn add react-fast-bento
 ```
 
-## Usage
+## Peer Dependencies
 
-### Basic Example
+This package requires the following peer dependencies:
 
-```jsx
-import React from "react";
+```json
+{
+  "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+  "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
+  "framer-motion": "^10.0.0",
+  "react-beautiful-dnd": "^13.0.0"
+}
+```
+
+## Quick Start
+
+```tsx
 import { BentoContainer, BentoItem } from "react-fast-bento";
 
-const App = () => {
+function MyBentoGrid() {
   return (
-    <BentoContainer colSpan={3} rowSpan={2} spacing={10}>
-      <BentoItem colSpan={1} rowSpan={1}>
-        Item 1
-      </BentoItem>
-      <BentoItem colSpan={2} rowSpan={1}>
-        Item 2
+    <BentoContainer>
+      <BentoItem colSpan={2} rowSpan={2}>
+        <div>Large Item</div>
       </BentoItem>
       <BentoItem colSpan={1} rowSpan={1}>
-        Item 3
-      </BentoItem>
-      <BentoItem colSpan={2} rowSpan={1}>
-        Item 4
+        <div>Small Item</div>
       </BentoItem>
     </BentoContainer>
   );
-};
-
-export default App;
+}
 ```
 
-### Custom Grid Template
-
-You can define a custom grid template using the `gridTemplate` prop.
-
-```jsx
-<BentoContainer gridTemplate="1fr 2fr 1fr" spacing={10}>
-  <BentoItem colSpan={1} rowSpan={1}>
-    Item 1
-  </BentoItem>
-  <BentoItem colSpan={2} rowSpan={1}>
-    Item 2
-  </BentoItem>
-  <BentoItem colSpan={1} rowSpan={1}>
-    Item 3
-  </BentoItem>
-</BentoContainer>
-```
-
-### Drag and Drop
-
-Enable drag and drop functionality using the `onDragEnd` prop.
-
-```jsx
-const handleDragEnd = (result) => {
-  // Handle drag end logic here
-};
-
-<BentoContainer onDragEnd={handleDragEnd} spacing={10}>
-  <BentoItem draggableId="item-1" index={0}>
-    Item 1
-  </BentoItem>
-  <BentoItem draggableId="item-2" index={1}>
-    Item 2
-  </BentoItem>
-  <BentoItem draggableId="item-3" index={2}>
-    Item 3
-  </BentoItem>
-</BentoContainer>;
-```
-
-### Responsive Design
-
-Use the `sm`, `md`, and `lg` props to define responsive layouts.
-
-```jsx
-<BentoContainer
-  colSpan={1}
-  rowSpan={1}
-  sm={{ colSpan: 2, rowSpan: 1, spacing: 5 }}
-  md={{ colSpan: 3, rowSpan: 1, spacing: 10 }}
-  lg={{ colSpan: 4, rowSpan: 1, spacing: 15 }}
-  spacing={0}
->
-  <BentoItem>Item 1</BentoItem>
-  <BentoItem>Item 2</BentoItem>
-  <BentoItem>Item 3</BentoItem>
-  <BentoItem>Item 4</BentoItem>
-</BentoContainer>
-```
-
-### Error Handling
-
-The components are wrapped with error boundaries to gracefully handle runtime errors.
-
-```jsx
-<BentoContainer>
-  <BentoItem>Item 1</BentoItem>
-  <BentoItem>Item 2</BentoItem>
-  <BentoItem>Item 3</BentoItem>
-</BentoContainer>
-```
-
-## Props
+## Components
 
 ### BentoContainer
 
-| Prop              | Type                                                     | Default         | Description                                           |
-| ----------------- | -------------------------------------------------------- | --------------- | ----------------------------------------------------- |
-| children          | ReactNode                                                | -               | Child components to be rendered inside the container. |
-| colSpan           | number                                                   | 1               | Number of columns in the grid.                        |
-| rowSpan           | number                                                   | 1               | Number of rows in the grid.                           |
-| align             | "start" \| "center" \| "end"                             | "start"         | Alignment of the grid items.                          |
-| alignItems        | "start" \| "center" \| "end"                             | "start"         | Alignment of the grid items along the cross axis.     |
-| spacing           | number                                                   | 0               | Spacing between grid items.                           |
-| justify           | "start" \| "center" \| "end"                             | "start"         | Justification of the grid items.                      |
-| direction         | "row" \| "column"                                        | "row"           | Direction of the grid items.                          |
-| style             | CSSProperties                                            | -               | Custom styles for the container.                      |
-| width             | string                                                   | -               | Width of the container.                               |
-| height            | string                                                   | -               | Height of the container.                              |
-| animate           | boolean                                                  | false           | Whether to animate the container.                     |
-| transition        | string                                                   | "all 0.3s ease" | Transition for the container.                         |
-| animationDuration | string                                                   | "0.3s"          | Duration of the animation.                            |
-| sm                | { colSpan?: number; rowSpan?: number; spacing?: number } | -               | Responsive styles for small screens.                  |
-| md                | { colSpan?: number; rowSpan?: number; spacing?: number } | -               | Responsive styles for medium screens.                 |
-| lg                | { colSpan?: number; rowSpan?: number; spacing?: number } | -               | Responsive styles for large screens.                  |
-| theme             | "light" \| "dark" \| "minimal"                           | "light"         | Theme of the container.                               |
-| lazyLoad          | boolean                                                  | false           | Whether to lazy load the items.                       |
-| itemCount         | number                                                   | -               | Number of items to load.                              |
-| onDragEnd         | (result: any) => void                                    | -               | Callback function for drag end event.                 |
-| gridTemplate      | string                                                   | -               | Custom grid template for the container.               |
+The main container component that manages the grid layout.
+
+#### Props
+
+| Prop           | Type                         | Description                         | Default |
+| -------------- | ---------------------------- | ----------------------------------- | ------- |
+| `children`     | ReactNode                    | Grid items                          | -       |
+| `gap`          | number                       | Gap between grid items (in pixels)  | 16      |
+| `padding`      | number                       | Padding around the grid (in pixels) | 16      |
+| `maxWidth`     | number                       | Maximum width of the container      | 1200    |
+| `theme`        | 'light' \| 'dark'            | Theme of the grid                   | 'light' |
+| `onDragEnd`    | (result: DropResult) => void | Callback when drag ends             | -       |
+| `gridTemplate` | string                       | Custom CSS grid template            | -       |
 
 ### BentoItem
 
-| Prop        | Type          | Default | Description                                      |
-| ----------- | ------------- | ------- | ------------------------------------------------ |
-| children    | ReactNode     | -       | Child components to be rendered inside the item. |
-| colSpan     | number        | 1       | Number of columns the item spans.                |
-| rowSpan     | number        | 1       | Number of rows the item spans.                   |
-| style       | CSSProperties | -       | Custom styles for the item.                      |
-| draggableId | string        | -       | ID for the draggable item.                       |
-| index       | number        | -       | Index of the item in the list.                   |
+Individual grid item component.
+
+#### Props
+
+| Prop           | Type       | Description               | Default |
+| -------------- | ---------- | ------------------------- | ------- |
+| `children`     | ReactNode  | Item content              | -       |
+| `colSpan`      | number     | Number of columns to span | 1       |
+| `rowSpan`      | number     | Number of rows to span    | 1       |
+| `draggableId`  | string     | ID for drag and drop      | -       |
+| `index`        | number     | Index for drag and drop   | -       |
+| `onClick`      | () => void | Click handler             | -       |
+| `onMouseEnter` | () => void | Mouse enter handler       | -       |
+| `onMouseLeave` | () => void | Mouse leave handler       | -       |
+
+## Examples
+
+### Basic Grid
+
+```tsx
+<BentoContainer>
+  <BentoItem colSpan={2} rowSpan={2}>
+    <div>Featured Content</div>
+  </BentoItem>
+  <BentoItem colSpan={1} rowSpan={1}>
+    <div>Small Item 1</div>
+  </BentoItem>
+  <BentoItem colSpan={1} rowSpan={1}>
+    <div>Small Item 2</div>
+  </BentoItem>
+</BentoContainer>
+```
+
+### With Drag and Drop
+
+```tsx
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
+
+function MyDraggableGrid() {
+  const handleDragEnd = (result: DropResult) => {
+    // Handle drag end
+  };
+
+  return (
+    <BentoContainer onDragEnd={handleDragEnd}>
+      <BentoItem draggableId="item1" index={0} colSpan={2}>
+        <div>Draggable Item 1</div>
+      </BentoItem>
+      <BentoItem draggableId="item2" index={1} colSpan={1}>
+        <div>Draggable Item 2</div>
+      </BentoItem>
+    </BentoContainer>
+  );
+}
+```
+
+### Custom Theme
+
+```tsx
+<BentoContainer theme="dark" gap={24} padding={24}>
+  <BentoItem colSpan={2}>
+    <div>Dark Theme Item</div>
+  </BentoItem>
+</BentoContainer>
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-MIT
+ISC © [Your Name]
