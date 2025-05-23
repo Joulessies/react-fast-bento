@@ -6,5 +6,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "jsdom",
+    setupFiles: ["./src/test/setup.ts"],
+    alias: {
+      "react-beautiful-dnd": "./src/__mocks__/react-beautiful-dnd.tsx",
+    },
   },
 });

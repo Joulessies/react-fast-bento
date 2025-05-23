@@ -1,10 +1,9 @@
 import { BentoContainer } from "./BentoContainer";
 import { expect, test } from "vitest";
+import { render } from "@testing-library/react";
 
 test("BentoContainer renders", () => {
-    expect(<BentoContainer>Test content</BentoContainer>).toMatchInlineSnapshot(`
-      <BentoContainer>
-        Test content
-      </BentoContainer>
-    `);
+  const { container } = render(<BentoContainer>Test content</BentoContainer>);
+
+  expect(container).toMatchSnapshot();
 });

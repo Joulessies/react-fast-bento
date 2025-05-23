@@ -24,5 +24,5 @@ export default {
       exclude: ["**/__tests__/**", "**/*.test.ts", "**/*.test.tsx"],
     }),
   ],
-  external: ["react", "react-dom", "framer-motion", "react-beautiful-dnd"],
+  external: ["react", "react-dom", "framer-motion"],
 };

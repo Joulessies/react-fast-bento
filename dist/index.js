@@ -4,8 +4,7 @@ import React, {
   useEffect
 } from "react";
 import { motion } from "framer-motion";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { jsx, jsxs } from "react/jsx-runtime";
+import { jsx } from "react/jsx-runtime";
 var ErrorBoundary = class extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +44,6 @@ var BentoContainer = ({
   theme = "light",
   lazyLoad = false,
   itemCount,
-  onDragEnd,
   gridTemplate
 }) => {
   const [visibleItems, setVisibleItems] = useState([]);
@@ -103,42 +101,16 @@ var BentoContainer = ({
       }
     }
   };
-  const handleDragEnd = (result) => {
-    if (onDragEnd) {
-      onDragEnd(result);
-    }
-  };
-  return /* @__PURE__ */ jsx(ErrorBoundary, { children: /* @__PURE__ */ jsx(DragDropContext, { onDragEnd: handleDragEnd, children: /* @__PURE__ */ jsx(Droppable, { droppableId: "bento-container", children: (provided) => /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsx(ErrorBoundary, { children: /* @__PURE__ */ jsx(
     motion.div,
     {
       initial: { opacity: 0 },
       animate: { opacity: 1 },
       transition: { duration: 0.5 },
       style: responsiveStyle,
-      ref: provided.innerRef,
-      ...provided.droppableProps,
-      children: [
-        isLoading ? /* @__PURE__ */ jsx("div", { children: "Loading..." }) : visibleItems.map((item, index) => /* @__PURE__ */ jsx(
-          Draggable,
-          {
-            draggableId: `item-${index}`,
-            index,
-            children: (provided2) => /* @__PURE__ */ jsx(
-              "div",
-              {
-                ref: provided2.innerRef,
-                ...provided2.draggableProps,
-                ...provided2.dragHandleProps,
-                children: item
-              }
-            )
-          },
-          index
-        )),
-        provided.placeholder
-      ]
+      children: isLoading ? /* @__PURE__ */ jsx("div", { children: "Loading..." }) : visibleItems.map((item, index) => /* @__PURE__ */ jsx("div", { children: item }, index))
     }
-  ) }) }) });
+  ) });
 };
 
 // src/components/BentoItem.tsx
@@ -146,7 +118,7 @@ import React2, {
   useState as useState2,
   useEffect as useEffect2
 } from "react";
-import { Draggable as Draggable2 } from "react-beautiful-dnd";
+import { motion as motion2, AnimatePresence } from "framer-motion";
 import { jsx as jsx2 } from "react/jsx-runtime";
 var BentoItem = ({
   children,
@@ -168,9 +140,7 @@ var BentoItem = ({
   focusable = true,
   theme = "light",
   lazyLoad = false,
-  itemCount,
-  draggableId,
-  index
+  itemCount
 }) => {
   const [visibleItems, setVisibleItems] = useState2([]);
   const [isLoading, setIsLoading] = useState2(false);
@@ -216,21 +186,27 @@ var BentoItem = ({
       }
     }
   };
-  return /* @__PURE__ */ jsx2(Draggable2, { draggableId, index, children: (provided) => /* @__PURE__ */ jsx2(
-    "div",
+  return /* @__PURE__ */ jsx2(AnimatePresence, { children: /* @__PURE__ */ jsx2(
+    motion2.div,
     {
-      className,
-      style: responsiveStyle,
-      onClick,
-      onMouseEnter,
-      onMouseLeave,
-      role,
-      "aria-label": ariaLabel,
-      tabIndex: focusable ? 0 : -1,
-      ref: provided.innerRef,
-      ...provided.draggableProps,
-      ...provided.dragHandleProps,
-      children: isLoading ? /* @__PURE__ */ jsx2("div", { children: "Loading..." }) : visibleItems
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      exit: { opacity: 0 },
+      transition: { duration: 0.3 },
+      children: /* @__PURE__ */ jsx2(
+        "div",
+        {
+          className,
+          style: responsiveStyle,
+          onClick,
+          onMouseEnter,
+          onMouseLeave,
+          role,
+          "aria-label": ariaLabel,
+          tabIndex: focusable ? 0 : -1,
+          children: isLoading ? /* @__PURE__ */ jsx2("div", { children: "Loading..." }) : visibleItems
+        }
+      )
     }
   ) });
 };

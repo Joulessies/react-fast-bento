@@ -12,7 +12,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 const config = {
   title: "React Fast Bento",
   tagline: "🍱 Create fast and easy bento layouts and boxes 🍱",
-  favicon: "img/favicon.ico",
+  favicon: "img/favicon.svg",
 
   // Set the production url of your site here
   url: "https://your-docusaurus-site.example.com",
@@ -85,9 +85,13 @@ const config = {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
             position: "left",
-            label: "Tutorial",
+            label: "Documentation",
           },
-          { to: "/blog", label: "Blog", position: "left" },
+          {
+            to: "/docs/examples",
+            label: "Examples",
+            position: "left",
+          },
           {
             href: "https://github.com/facebook/docusaurus",
             label: "GitHub",
@@ -102,7 +106,7 @@ const config = {
             title: "Docs",
             items: [
               {
-                label: "Tutorial",
+                label: "Documentation",
                 to: "/docs/intro",
               },
             ],
@@ -127,10 +131,6 @@ const config = {
           {
             title: "More",
             items: [
-              {
-                label: "Blog",
-                to: "/blog",
-              },
               {
                 label: "GitHub",
                 href: "https://github.com/facebook/docusaurus",

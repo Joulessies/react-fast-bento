@@ -6,7 +6,6 @@ import React, {
   useEffect,
 } from "react";
 import { motion } from "framer-motion";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 class ErrorBoundary extends React.Component<
   { children: ReactNode },
@@ -54,7 +53,6 @@ interface BentoContainerProps {
   theme?: "light" | "dark" | "minimal";
   lazyLoad?: boolean;
   itemCount?: number;
-  onDragEnd?: (result: any) => void;
   gridTemplate?: string;
 }
 
@@ -79,7 +77,6 @@ export const BentoContainer: FC<BentoContainerProps> = ({
   theme = "light",
   lazyLoad = false,
   itemCount,
-  onDragEnd,
   gridTemplate,
 }) => {
   const [visibleItems, setVisibleItems] = useState<ReactNode[]>([]);
@@ -146,51 +143,20 @@ export const BentoContainer: FC<BentoContainerProps> = ({
     }),
   };
 
-  const handleDragEnd = (result: any) => {
-    if (onDragEnd) {
-      onDragEnd(result);
-    }
-  };
-
   return (
     <ErrorBoundary>
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId="bento-container">
-          {(provided) => (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              style={responsiveStyle}
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
-              {isLoading ? (
-                <div>Loading...</div>
-              ) : (
-                visibleItems.map((item, index) => (
-                  <Draggable
-                    key={index}
-                    draggableId={`item-${index}`}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        {item}
-                      </div>
-                    )}
-                  </Draggable>
-                ))
-              )}
-              {provided.placeholder}
-            </motion.div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        style={responsiveStyle}
+      >
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          visibleItems.map((item, index) => <div key={index}>{item}</div>)
+        )}
+      </motion.div>
     </ErrorBoundary>
   );
 };

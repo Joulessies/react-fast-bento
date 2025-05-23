@@ -33,7 +33,6 @@ interface BentoContainerProps {
     theme?: "light" | "dark" | "minimal";
     lazyLoad?: boolean;
     itemCount?: number;
-    onDragEnd?: (result: any) => void;
     gridTemplate?: string;
 }
 declare const BentoContainer: FC<BentoContainerProps>;
@@ -68,8 +67,6 @@ interface BentoItemProps {
     theme?: "light" | "dark" | "minimal";
     lazyLoad?: boolean;
     itemCount?: number;
-    draggableId: string;
-    index: number;
 }
 declare const BentoItem: FC<BentoItemProps>;
 

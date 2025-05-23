@@ -5,8 +5,7 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import { motion } from "framer-motion";
-import { Draggable, DraggableProvided } from "react-beautiful-dnd";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface BentoItemProps {
   children: ReactNode;
@@ -29,8 +28,6 @@ interface BentoItemProps {
   theme?: "light" | "dark" | "minimal";
   lazyLoad?: boolean;
   itemCount?: number;
-  draggableId: string;
-  index: number;
 }
 
 export const BentoItem: FC<BentoItemProps> = ({
@@ -54,8 +51,6 @@ export const BentoItem: FC<BentoItemProps> = ({
   theme = "light",
   lazyLoad = false,
   itemCount,
-  draggableId,
-  index,
 }) => {
   const [visibleItems, setVisibleItems] = useState<ReactNode[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -108,8 +103,13 @@ export const BentoItem: FC<BentoItemProps> = ({
   };
 
   return (
-    <Draggable draggableId={draggableId} index={index}>
-      {(provided: DraggableProvided) => (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
         <div
           className={className}
           style={responsiveStyle}
@@ -119,13 +119,10 @@ export const BentoItem: FC<BentoItemProps> = ({
           role={role}
           aria-label={ariaLabel}
           tabIndex={focusable ? 0 : -1}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
         >
           {isLoading ? <div>Loading...</div> : visibleItems}
         </div>
-      )}
-    </Draggable>
+      </motion.div>
+    </AnimatePresence>
   );
 };
