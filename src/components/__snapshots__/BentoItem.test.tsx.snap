@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BentoItem renders 1`] = `
+<div>
+  <div
+    style="opacity: 0;"
+  >
+    <div
+      style="grid-column: span 1; grid-row: span 1;"
+      tabindex="0"
+    >
+      Test content
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BentoContainer renders 1`] = `
+<div>
+  <div
+    style="display: grid; grid-template-columns: repeat(1, 1fr); grid-template-rows: repeat(1, 1fr); align-content: start; align-items: start; justify-content: start; gap: 0px; flex-direction: row; opacity: 0;"
+  >
+    <div>
+      Test content
+    </div>
+  </div>
+</div>
+`;
