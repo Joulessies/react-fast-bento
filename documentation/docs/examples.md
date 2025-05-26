@@ -67,32 +67,6 @@ function ThemedGrid() {
 }
 ```
 
-## Drag and Drop
-
-```jsx
-import { BentoContainer, BentoItem } from "react-fast-bento";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
-
-function MyDraggableGrid() {
-  const handleDragEnd = (result: DropResult) => {
-    // Handle drag end logic here
-  };
-
-  return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <BentoContainer>
-        <BentoItem draggableId="item1" index={0} colSpan={2}>
-          <div>Draggable Item 1</div>
-        </BentoItem>
-        <BentoItem draggableId="item2" index={1} colSpan={1}>
-          <div>Draggable Item 2</div>
-        </BentoItem>
-      </BentoContainer>
-    </DragDropContext>
-  );
-}
-```
-
 ---
 
 Feel free to mix and match these examples or adapt them to your own use case. For more advanced usage, see the API Reference or Customization sections.

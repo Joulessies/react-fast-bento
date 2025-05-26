@@ -74,11 +74,9 @@
     "vitest": "^3.0.8"
   },
   "dependencies": {
-    "@types/react-beautiful-dnd": "^13.1.8",
     "@vitejs/plugin-react": "^4.3.4",
     "framer-motion": "^10.0.0",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "tslib": "^2.8.1"
   },
