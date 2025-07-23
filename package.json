@@ -26,7 +26,6 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "commitlint": "commitlint --edit ${1}",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
