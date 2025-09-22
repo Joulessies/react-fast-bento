@@ -65,7 +65,7 @@ const pickResponsive = (base, responsive, active) => {
  */
 export const BentoGrid = React.forwardRef(function BentoGrid(props, ref) {
   const {
-    as: Component = "div",
+    as: _as = "div",
     columns = 4,
     gap = 8,
     columnGap,
@@ -135,6 +135,7 @@ export const BentoGrid = React.forwardRef(function BentoGrid(props, ref) {
     [baseStyle, responsive, active]
   );
 
+  const Component = _as;
   return (
     <Component
       ref={ref}

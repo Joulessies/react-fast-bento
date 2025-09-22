@@ -7,7 +7,7 @@ export default [
   js.configs.recommended,
   {
     files: ["src/**/*.js", "test/**/*.js"],
-    ignores: ["**/node_modules/**", "test/setupTests.js"],
+    ignores: ["**/node_modules/**"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
@@ -26,6 +26,10 @@ export default [
     rules: {
       // Match previous behavior
       "react/prop-types": "off",
+      "no-unused-vars": [
+        "error",
+        { varsIgnorePattern: "^_", argsIgnorePattern: "^_" },
+      ],
     },
     settings: {
       react: { version: "detect" },

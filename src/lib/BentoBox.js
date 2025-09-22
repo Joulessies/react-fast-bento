@@ -1,12 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const toCssSize = (value) => {
-  if (value == null) return undefined;
-  if (typeof value === "number") return `${value}px`;
-  return String(value);
-};
-
 /**
  * BentoBox
  * Props:
@@ -16,7 +10,7 @@ const toCssSize = (value) => {
  */
 export const BentoBox = React.forwardRef(function BentoBox(props, ref) {
   const {
-    as: Component = "div",
+    as: _as = "div",
     asChild = false,
     colSpan,
     rowSpan,
@@ -54,6 +48,7 @@ export const BentoBox = React.forwardRef(function BentoBox(props, ref) {
     ...(placeSelf != null && { placeSelf: String(placeSelf) }),
   };
 
+  const Component = _as;
   if (asChild && React.isValidElement(children)) {
     return React.cloneElement(children, {
       ref,
