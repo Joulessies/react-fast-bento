@@ -1,5 +1,6 @@
 import { renderHook } from "@testing-library/react";
-import { jest } from '@jest/globals';
+import { vi } from "vitest";
+import { jest } from "@jest/globals";
 import { useBreakpoint } from "../src/index.js";
 
 describe("useBreakpoint", () => {
@@ -11,11 +12,11 @@ describe("useBreakpoint", () => {
         const mql = {
           matches: false,
           media: query,
-          addListener: jest.fn(),
-          removeListener: jest.fn(),
-          addEventListener: jest.fn(),
-          removeEventListener: jest.fn(),
-          dispatchEvent: jest.fn(),
+          addListener: vi.fn(),
+          removeListener: vi.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+          dispatchEvent: vi.fn(),
         };
         return mql;
       },
