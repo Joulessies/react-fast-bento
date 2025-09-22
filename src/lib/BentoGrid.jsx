@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { useBreakpoint } from "./useBreakpoint.js";
+import { useBreakpoint } from "./useBreakpoint.jsx";
 
 const toCssSize = (value) => {
   if (value == null) return undefined;

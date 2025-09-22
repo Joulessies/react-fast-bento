@@ -64,7 +64,7 @@
     "test": "vitest",
     "test:ci": "vitest run --reporter=default",
     "typecheck": "npx tsc -p tsconfig.json --noEmit",
-    "lint": "eslint \"src/**/*.js\" \"test/**/*.js\"",
+    "lint": "eslint \"src/**/*.{js,jsx}\" \"test/**/*.{js,jsx}\"",
     "size": "size-limit"
   },
   "size-limit": [

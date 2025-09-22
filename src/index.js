@@ -1,3 +1,3 @@
-export { BentoGrid } from "./BentoGrid.js";
-export { BentoBox } from "./BentoBox.js";
-export { useBreakpoint } from "./useBreakpoint.js";
+export { BentoGrid } from "./lib/BentoGrid.jsx";
+export { BentoBox } from "./lib/BentoBox.jsx";
+export { useBreakpoint } from "./lib/useBreakpoint.jsx";
