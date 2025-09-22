@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const toCssSize = (value) => {
   if (value == null) return undefined;
@@ -16,8 +17,13 @@ const toCssSize = (value) => {
 export const BentoBox = React.forwardRef(function BentoBox(props, ref) {
   const {
     as: Component = "div",
+    asChild = false,
     colSpan,
     rowSpan,
+    span,
+    colStart,
+    rowStart,
+    placeSelf,
     style,
     className,
     children,
@@ -25,6 +31,12 @@ export const BentoBox = React.forwardRef(function BentoBox(props, ref) {
   } = props;
 
   const computedStyle = {
+    ...(span != null && {
+      gridColumn:
+        typeof span === "number" ? `span ${span} / span ${span}` : String(span),
+      gridRow:
+        typeof span === "number" ? `span ${span} / span ${span}` : String(span),
+    }),
     ...(colSpan != null && {
       gridColumn:
         typeof colSpan === "number"
@@ -37,7 +49,21 @@ export const BentoBox = React.forwardRef(function BentoBox(props, ref) {
           ? `span ${rowSpan} / span ${rowSpan}`
           : String(rowSpan),
     }),
+    ...(colStart != null && { gridColumnStart: String(colStart) }),
+    ...(rowStart != null && { gridRowStart: String(rowStart) }),
+    ...(placeSelf != null && { placeSelf: String(placeSelf) }),
   };
+
+  if (asChild && React.isValidElement(children)) {
+    return React.cloneElement(children, {
+      ref,
+      className: [children.props.className, className]
+        .filter(Boolean)
+        .join(" "),
+      style: { ...computedStyle, ...children.props.style, ...style },
+      ...rest,
+    });
+  }
 
   return (
     <Component
@@ -50,3 +76,17 @@ export const BentoBox = React.forwardRef(function BentoBox(props, ref) {
     </Component>
   );
 });
+
+BentoBox.propTypes = {
+  as: PropTypes.any,
+  asChild: PropTypes.bool,
+  colSpan: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  rowSpan: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  span: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  colStart: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  rowStart: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  placeSelf: PropTypes.string,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  children: PropTypes.node,
+};

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useMemo } from "react";
+import PropTypes from "prop-types";
+import { useBreakpoint } from "./useBreakpoint.js";
 
 const toCssSize = (value) => {
   if (value == null) return undefined;
@@ -6,22 +8,50 @@ const toCssSize = (value) => {
   return String(value);
 };
 
-const breakpointMedia = {
-  sm: "@media (min-width: 640px)",
-  md: "@media (min-width: 768px)",
-  lg: "@media (min-width: 1024px)",
-  xl: "@media (min-width: 1280px)",
+const resolveAutoRows = (value) => {
+  if (value == null) return undefined;
+  if (typeof value === "number") return `${value}px`;
+  const presets = { sm: "80px", md: "120px", lg: "160px" };
+  return presets[value] || String(value);
 };
 
-const buildResponsiveStyle = (base, responsive) => {
-  if (!responsive) return base;
-  const style = { ...base };
-  for (const [bp, rules] of Object.entries(responsive)) {
-    const mq = breakpointMedia[bp];
-    if (!mq) continue;
-    style[mq] = { ...(style[mq] || {}), ...rules };
-  }
-  return style;
+const pickResponsive = (base, responsive, active) => {
+  if (!responsive || !active) return base;
+  const src = responsive[active];
+  if (!src) return base;
+  return {
+    ...base,
+    ...(src.columns != null && {
+      gridTemplateColumns:
+        typeof src.columns === "number"
+          ? `repeat(${src.columns}, minmax(0, 1fr))`
+          : String(src.columns),
+    }),
+    ...(src.gap != null && { gap: toCssSize(src.gap) }),
+    ...(src.columnGap != null && { columnGap: toCssSize(src.columnGap) }),
+    ...(src.rowGap != null && { rowGap: toCssSize(src.rowGap) }),
+    ...(src.rows != null && {
+      gridTemplateRows:
+        typeof src.rows === "number"
+          ? `repeat(${src.rows}, minmax(0, 1fr))`
+          : String(src.rows),
+    }),
+    ...(src.areas != null && {
+      gridTemplateAreas: Array.isArray(src.areas)
+        ? src.areas.map((r) => `'${r}'`).join(" ")
+        : String(src.areas),
+    }),
+    ...(src.minRowHeight != null && {
+      gridAutoRows: toCssSize(src.minRowHeight),
+    }),
+    ...(src.autoRows != null && {
+      gridAutoRows: resolveAutoRows(src.autoRows),
+    }),
+    ...(src.placeItems != null && { placeItems: String(src.placeItems) }),
+    ...(src.placeContent != null && { placeContent: String(src.placeContent) }),
+    ...(src.justifyItems != null && { justifyItems: String(src.justifyItems) }),
+    ...(src.alignItems != null && { alignItems: String(src.alignItems) }),
+  };
 };
 
 /**
@@ -38,7 +68,16 @@ export const BentoGrid = React.forwardRef(function BentoGrid(props, ref) {
     as: Component = "div",
     columns = 4,
     gap = 8,
+    columnGap,
+    rowGap,
     minRowHeight,
+    autoRows,
+    rows,
+    areas,
+    placeItems,
+    placeContent,
+    justifyItems,
+    alignItems,
     responsive,
     style,
     className,
@@ -46,85 +85,92 @@ export const BentoGrid = React.forwardRef(function BentoGrid(props, ref) {
     ...rest
   } = props;
 
-  const baseStyle = {
-    display: "grid",
-    gridTemplateColumns:
-      typeof columns === "number"
-        ? `repeat(${columns}, minmax(0, 1fr))`
-        : String(columns),
-    gap: toCssSize(gap),
-    ...(minRowHeight ? { gridAutoRows: toCssSize(minRowHeight) } : {}),
-  };
+  const baseStyle = useMemo(
+    () => ({
+      display: "grid",
+      gridTemplateColumns:
+        typeof columns === "number"
+          ? `repeat(${columns}, minmax(0, 1fr))`
+          : String(columns),
+      ...(gap != null ? { gap: toCssSize(gap) } : {}),
+      ...(columnGap != null ? { columnGap: toCssSize(columnGap) } : {}),
+      ...(rowGap != null ? { rowGap: toCssSize(rowGap) } : {}),
+      ...(rows != null && {
+        gridTemplateRows:
+          typeof rows === "number"
+            ? `repeat(${rows}, minmax(0, 1fr))`
+            : String(rows),
+      }),
+      ...(areas != null && {
+        gridTemplateAreas: Array.isArray(areas)
+          ? areas.map((r) => `'${r}'`).join(" ")
+          : String(areas),
+      }),
+      ...(minRowHeight ? { gridAutoRows: toCssSize(minRowHeight) } : {}),
+      ...(autoRows != null ? { gridAutoRows: resolveAutoRows(autoRows) } : {}),
+      ...(placeItems != null ? { placeItems: String(placeItems) } : {}),
+      ...(placeContent != null ? { placeContent: String(placeContent) } : {}),
+      ...(justifyItems != null ? { justifyItems: String(justifyItems) } : {}),
+      ...(alignItems != null ? { alignItems: String(alignItems) } : {}),
+    }),
+    [
+      columns,
+      gap,
+      columnGap,
+      rowGap,
+      rows,
+      areas,
+      minRowHeight,
+      autoRows,
+      placeItems,
+      placeContent,
+      justifyItems,
+      alignItems,
+    ]
+  );
 
-  const responsiveStyle = responsive
-    ? buildResponsiveStyle(baseStyle, {
-        sm: responsive.sm && {
-          ...(responsive.sm.columns != null && {
-            gridTemplateColumns:
-              typeof responsive.sm.columns === "number"
-                ? `repeat(${responsive.sm.columns}, minmax(0, 1fr))`
-                : String(responsive.sm.columns),
-          }),
-          ...(responsive.sm.gap != null && {
-            gap: toCssSize(responsive.sm.gap),
-          }),
-          ...(responsive.sm.minRowHeight != null && {
-            gridAutoRows: toCssSize(responsive.sm.minRowHeight),
-          }),
-        },
-        md: responsive.md && {
-          ...(responsive.md.columns != null && {
-            gridTemplateColumns:
-              typeof responsive.md.columns === "number"
-                ? `repeat(${responsive.md.columns}, minmax(0, 1fr))`
-                : String(responsive.md.columns),
-          }),
-          ...(responsive.md.gap != null && {
-            gap: toCssSize(responsive.md.gap),
-          }),
-          ...(responsive.md.minRowHeight != null && {
-            gridAutoRows: toCssSize(responsive.md.minRowHeight),
-          }),
-        },
-        lg: responsive.lg && {
-          ...(responsive.lg.columns != null && {
-            gridTemplateColumns:
-              typeof responsive.lg.columns === "number"
-                ? `repeat(${responsive.lg.columns}, minmax(0, 1fr))`
-                : String(responsive.lg.columns),
-          }),
-          ...(responsive.lg.gap != null && {
-            gap: toCssSize(responsive.lg.gap),
-          }),
-          ...(responsive.lg.minRowHeight != null && {
-            gridAutoRows: toCssSize(responsive.lg.minRowHeight),
-          }),
-        },
-        xl: responsive.xl && {
-          ...(responsive.xl.columns != null && {
-            gridTemplateColumns:
-              typeof responsive.xl.columns === "number"
-                ? `repeat(${responsive.xl.columns}, minmax(0, 1fr))`
-                : String(responsive.xl.columns),
-          }),
-          ...(responsive.xl.gap != null && {
-            gap: toCssSize(responsive.xl.gap),
-          }),
-          ...(responsive.xl.minRowHeight != null && {
-            gridAutoRows: toCssSize(responsive.xl.minRowHeight),
-          }),
-        },
-      })
-    : baseStyle;
+  const active = useBreakpoint();
+  const computedStyle = useMemo(
+    () => pickResponsive(baseStyle, responsive, active),
+    [baseStyle, responsive, active]
+  );
 
   return (
     <Component
       ref={ref}
       className={className}
-      style={{ ...responsiveStyle, ...style }}
+      role={rest.role}
+      style={{ ...computedStyle, ...style }}
       {...rest}
     >
       {children}
     </Component>
   );
 });
+
+BentoGrid.propTypes = {
+  as: PropTypes.any,
+  columns: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  gap: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  columnGap: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  rowGap: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  minRowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  autoRows: PropTypes.oneOfType([
+    PropTypes.oneOf(["sm", "md", "lg"]),
+    PropTypes.number,
+    PropTypes.string,
+  ]),
+  rows: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  areas: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
+  placeItems: PropTypes.string,
+  placeContent: PropTypes.string,
+  justifyItems: PropTypes.string,
+  alignItems: PropTypes.string,
+  responsive: PropTypes.object,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  children: PropTypes.node,
+};
