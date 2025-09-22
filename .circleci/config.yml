@@ -1,79 +1,87 @@
-version: 2.1
-
-workflows:
-  ci:
-    jobs:
-      - lint
-      - typecheck:
-          requires: [lint]
-      - test:
-          requires: [typecheck]
-      - size:
-          requires: [test]
-
-jobs:
-  base:
-    docker:
-      - image: cimg/node:20.12
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-npm-{{ .Branch }}-
-      - run: npm install --no-audit --no-fund
-      - save_cache:
-          key: v1-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
-          paths:
-            - ~/.npm
-
-  lint:
-    docker:
-      - image: cimg/node:20.12
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-npm-{{ .Branch }}-
-      - run: npm install --no-audit --no-fund
-      - run: npm run lint
-
-  typecheck:
-    docker:
-      - image: cimg/node:20.12
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-npm-{{ .Branch }}-
-      - run: npm install --no-audit --no-fund
-      - run: npm run typecheck
-
-  test:
-    docker:
-      - image: cimg/node:20.12
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-npm-{{ .Branch }}-
-      - run: npm install --no-audit --no-fund
-      - run: npm run test:ci
-      - store_artifacts:
-          path: junit.xml
-          when: always
-
-  size:
-    docker:
-      - image: cimg/node:20.12
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-npm-{{ .Branch }}-
-      - run: npm install --no-audit --no-fund
-      - run: npm run size
+{
+  "version": 2.1,
+  "orbs": { "node": "circleci/node@5" },
+  "workflows":
+    {
+      "ci":
+        {
+          "jobs":
+            [
+              {
+                "node/install-packages":
+                  {
+                    "pkg-manager": "npm",
+                    "cache-version": "v1",
+                    "include-branch-in-cache-key": true,
+                    "install-command": "npm install --no-audit --no-fund",
+                  },
+              },
+              { "test": { "requires": ["node/install-packages"] } },
+              { "lint": { "requires": ["node/install-packages"] } },
+              { "typecheck": { "requires": ["node/install-packages"] } },
+              { "size": { "requires": ["node/install-packages"] } },
+            ],
+        },
+    },
+  "jobs":
+    {
+      "test":
+        {
+          "docker": [{ "image": "cimg/node:20.12" }],
+          "steps":
+            [
+              "checkout",
+              {
+                "restore_cache":
+                  {
+                    "keys":
+                      [
+                        'v1-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}',
+                        "v1-npm-{{ .Branch }}-",
+                      ],
+                  },
+              },
+              { "run": "npm install --no-audit --no-fund" },
+              { "run": "npm run test:ci" },
+              {
+                "save_cache":
+                  {
+                    "key": 'v1-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}',
+                    "paths": ["~/.npm"],
+                  },
+              },
+              { "store_artifacts": { "path": "junit.xml", "when": "always" } },
+            ],
+        },
+      "lint":
+        {
+          "docker": [{ "image": "cimg/node:20.12" }],
+          "steps":
+            [
+              "checkout",
+              { "run": "npm install --no-audit --no-fund" },
+              { "run": "npm run lint" },
+            ],
+        },
+      "typecheck":
+        {
+          "docker": [{ "image": "cimg/node:20.12" }],
+          "steps":
+            [
+              "checkout",
+              { "run": "npm install --no-audit --no-fund" },
+              { "run": "npm run typecheck" },
+            ],
+        },
+      "size":
+        {
+          "docker": [{ "image": "cimg/node:20.12" }],
+          "steps":
+            [
+              "checkout",
+              { "run": "npm install --no-audit --no-fund" },
+              { "run": "npm run size" },
+            ],
+        },
+    },
+}
