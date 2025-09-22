@@ -7,13 +7,17 @@ export default [
   js.configs.recommended,
   {
     files: ["src/**/*.js", "test/**/*.js"],
+    ignores: ["**/node_modules/**", "test/setupTests.js"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
       globals: {
         ...globals.browser,
         ...globals.es2021,
-        jest: true,
+        ...globals.jest,
+      },
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
       },
     },
     plugins: {
