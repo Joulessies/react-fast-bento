@@ -1,6 +1,5 @@
 import { renderHook } from "@testing-library/react";
 import { vi } from "vitest";
-import { jest } from "@jest/globals";
 import { useBreakpoint } from "../src/index.js";
 
 describe("useBreakpoint", () => {
