@@ -1,5 +1,4 @@
-import React from "react";
-import { renderHook, act } from "@testing-library/react";
+import { renderHook } from "@testing-library/react";
 import { useBreakpoint } from "../src/index.js";
 
 describe("useBreakpoint", () => {

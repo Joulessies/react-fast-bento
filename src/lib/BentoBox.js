@@ -60,15 +60,11 @@ export const BentoBox = React.forwardRef(function BentoBox(props, ref) {
     });
   }
 
-  return (
-    <Component
-      ref={ref}
-      className={className}
-      style={{ ...computedStyle, ...style }}
-      {...rest}
-    >
-      {children}
-    </Component>
+  const El = Component;
+  return React.createElement(
+    El,
+    { ref, className, style: { ...computedStyle, ...style }, ...rest },
+    children
   );
 });
 

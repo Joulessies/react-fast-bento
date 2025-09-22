@@ -135,17 +135,17 @@ export const BentoGrid = React.forwardRef(function BentoGrid(props, ref) {
     [baseStyle, responsive, active]
   );
 
-  const Component = _as;
-  return (
-    <Component
-      ref={ref}
-      className={className}
-      role={rest.role}
-      style={{ ...computedStyle, ...style }}
-      {...rest}
-    >
-      {children}
-    </Component>
+  const El = _as;
+  return React.createElement(
+    El,
+    {
+      ref,
+      className,
+      role: rest.role,
+      style: { ...computedStyle, ...style },
+      ...rest,
+    },
+    children
   );
 });
 
