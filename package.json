@@ -62,8 +62,8 @@
     "size-limit": "^11.1.4"
   },
   "scripts": {
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:ci": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --ci --reporters=default --reporters=jest-junit",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test:ci": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --ci --reporters=default --reporters=jest-junit",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint \"src/**/*.js\" \"test/**/*.js\"",
     "size": "size-limit"
