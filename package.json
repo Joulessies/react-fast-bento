@@ -58,7 +58,7 @@
     "size-limit": "^11.1.4"
   },
   "scripts": {
-    "test": "jest",
+    "test": "node ./node_modules/jest/bin/jest.js",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint \"src/**/*.js\" \"test/**/*.js\"",
     "size": "size-limit"
