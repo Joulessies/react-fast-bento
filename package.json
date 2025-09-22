@@ -69,12 +69,7 @@
     {
       "path": "src/index.js",
       "import": "{ BentoGrid, BentoBox }",
-      "limit": "2 kB",
-      "esbuild": {
-        "loader": {
-          ".js": "jsx"
-        }
-      }
+      "limit": "2 kB"
     }
   ],
   "jest": {
