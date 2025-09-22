@@ -30,6 +30,8 @@ export default [
         "error",
         { varsIgnorePattern: "^_", argsIgnorePattern: "^_" },
       ],
+      "react/jsx-uses-react": "off",
+      "react/jsx-uses-vars": "error",
     },
     settings: {
       react: { version: "detect" },
