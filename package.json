@@ -1,0 +1,43 @@
+{
+  "name": "react-fast-bento",
+  "version": "0.1.0",
+  "description": "Lightweight React components for bento grid layouts and boxes.",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "types": "src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "sideEffects": false,
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "react",
+    "bento",
+    "grid",
+    "layout",
+    "components"
+  ],
+  "author": "Julius",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Julius/react-fast-bento-remake.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Julius/react-fast-bento-remake/issues"
+  },
+  "homepage": "https://github.com/Julius/react-fast-bento-remake#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
+  }
+}
