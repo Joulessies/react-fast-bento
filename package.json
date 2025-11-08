@@ -54,7 +54,7 @@
     "eslint-plugin-react": "^7.37.1",
     "globals": "^15.9.0",
     "jsdom": "^20.0.3",
-    "react": "^19.1.1",
+    "react": "^19.2.0",
     "react-dom": "^19.1.1",
     "size-limit": "^11.1.4",
     "tough-cookie": "^4.1.4",
