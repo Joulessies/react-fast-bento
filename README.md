@@ -70,3 +70,4 @@ export default function Example() {
 - Responsive behavior is computed via a breakpoint hook; no `@media` in inline styles.
 - No runtime CSS dependency; uses inline styles. Bring your own visual styling.
 - Works with React 17+.
+# react-fast-bento
